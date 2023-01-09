@@ -1,7 +1,7 @@
 {
   "scripts": {
-    "start": "env-cmd -f app.env nodemon src/index.js",
-    "test": "env-cmd -f app.env nodemon src/app.js"
+    "start": "env-cmd -f app.env node src/app.js",
+    "dev": "env-cmd -f app.env nodemon src/app.js -e js,hbs"
   },
   "dependencies": {
     "chalk": "^4.1.0",
