@@ -1,0 +1,10 @@
+{
+  "scripts": {
+    "start": "env-cmd -f app.env nodemon src/index.js"
+  },
+  "dependencies": {
+    "chalk": "^4.1.0",
+    "env-cmd": "^10.1.0",
+    "request": "^2.88.2"
+  }
+}
