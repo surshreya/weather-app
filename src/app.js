@@ -30,19 +30,26 @@ app.get("", (req, res) => {
 });
 
 app.get("/about", (req, res) => {
-  res.send("Hello world");
+  res.render("about.hbs", {
+    title: "About Me",
+    name: "Shreya Sur",
+  });
 });
 
 app.get("/help", (req, res) => {
-  res.send("Hello world");
-});
-
-app.get("/weather", (req, res) => {
-  res.send("Hello world");
+  res.render("help.hbs", {
+    title: "Help",
+    helpText: "This is an example message.",
+    name: "Shreya Sur",
+  });
 });
 
 app.get("*", (req, res) => {
-  res.send("Error");
+  res.render("404.hbs", {
+    title: "404",
+    errorMsg: "Page not found",
+    name: "Shreya Sur",
+  });
 });
 
 app.listen(port, () => {
