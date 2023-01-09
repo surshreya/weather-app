@@ -9,20 +9,29 @@ const forecast = require("./utils/forecast");
  */
 const chalk = require("chalk");
 
-geocode("Boston", (err, data) => {
-  if (err) {
-    console.error(chalk.red.bold(err));
-    return;
-  }
+// Location as a command line input
+const ipLocation = process.argv[2];
 
-  const { latitude, longitude, location } = data;
-  forecast(latitude, longitude, (err, data) => {
+if (ipLocation !== undefined) {
+  geocode("Boston", (err, data) => {
     if (err) {
       console.error(chalk.red.bold(err));
       return;
     }
 
-    console.log("Location: ", chalk.yellow(location));
-    console.log(data);
+    const { latitude, longitude, location } = data;
+    forecast(latitude, longitude, (err, data) => {
+      if (err) {
+        console.error(chalk.red.bold(err));
+        return;
+      }
+
+      console.log("Location: ", chalk.yellow(location));
+      console.log(data);
+    });
   });
-});
+} else {
+  console.error(
+    chalk.red("Please provide a location as a command line argument...")
+  );
+}
