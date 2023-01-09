@@ -1,7 +1,8 @@
 /**
  * Importing own files
  */
-const { geocode } = require("./utils/geocode");
+const geocode = require("./utils/geocode");
+const forecast = require("./utils/forecast");
 
 /**
  * Importing external dependencies
@@ -15,5 +16,13 @@ geocode("Boston", (err, data) => {
   }
 
   const { latitude, longitude, location } = data;
-  console.log(latitude, longitude, location);
+  forecast(latitude, longitude, (err, data) => {
+    if (err) {
+      console.error(chalk.red.bold(err));
+      return;
+    }
+
+    console.log("Location: ", chalk.yellow(location));
+    console.log(data);
+  });
 });
