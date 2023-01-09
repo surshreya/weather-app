@@ -6,6 +6,9 @@ const chalk = require("chalk");
 const express = require("express");
 const hbs = require("hbs");
 
+const geocode = require("./utils/geocode");
+const forecast = require("./utils/forecast");
+
 const app = express();
 const port = process.env.PORT;
 
@@ -26,6 +29,36 @@ app.get("", (req, res) => {
   res.render("index.hbs", {
     title: "Weather App",
     name: "Shreya Sur",
+  });
+});
+
+app.get("/weather", (req, res) => {
+  if (!req.query.address) {
+    return res.send({
+      error: "Please provide an address",
+    });
+  }
+
+  geocode(req.query.address, (err, data) => {
+    if (err) {
+      return res.send({
+        error: err,
+      });
+    }
+
+    const { latitude, longitude, location } = data;
+    forecast(latitude, longitude, (err, data) => {
+      if (err) {
+        return res.send({
+          error: err,
+        });
+      }
+
+      res.send({
+        location,
+        forecast: data,
+      });
+    });
   });
 });
 

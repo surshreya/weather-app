@@ -22,13 +22,11 @@ const forecast = (latitude, longitude, callback) => {
       return;
     } else {
       const { current: data } = body;
-      const forecast = `${chalk.yellow(
-        data.weather_descriptions
-      )}. It is currently ${chalk.yellow(
+      const forecast = `${data.weather_descriptions}. It is currently ${
         data.observation_time
-      )} and ${chalk.yellow(
-        data.temperature + "°C"
-      )} out. It feels like ${chalk.yellow(data.feelslike + "°C")} out.`;
+      } and ${data.temperature + "°C"} out. It feels like ${
+        data.feelslike + "°C"
+      } out.`;
       callback(undefined, forecast);
     }
   });
